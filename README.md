@@ -45,8 +45,8 @@ di class Tagihan ini aku gabungin objek Klien sama objek JasaEdit buat bikin sat
 ```bash
    python3 posttest1PBO.py
 ```
-2. Cek baris `Total tagihan 1 ridho adalah Rp 555000.0` -> bukti instance method `total_tagihan()` jalan.
-3. Cek baris `Validasi nomor HP ridho: True` -> bukti staticmethod `validasi_no_hp()` jalan.
+2. Cek baris `Total tagihan 1 ridho = Rp 555000.0` -> bukti instance method `total_tagihan()` jalan.
+3. Cek baris `Validasi nomor HP ridho = True` -> bukti staticmethod `validasi_no_hp()` jalan.
 4. Cek baris `PPN berhasil diubah menjadi 15.0%` -> bukti classmethod `ubah_ppn()` berhasil mengubah atribut kelas `ppn`.
 5. Di bagian "Uji data tidak valid", pastikan muncul 3 pesan peringatan (`Nomor HP harus angka.`, `Durasi harus lebih dari 0.`, `Status harus 'Belum Lunas' atau 'Lunas'.`) -> bukti validasi di setter berjalan dan menolak data yang salah.
-6. Di bagian "Uji data valid", pastikan tidak ada pesan peringatan yang muncul, lalu cek baris terakhir `Status tagihan 1 baru ridho adalah Lunas` dan `Total tagihan 1 baru ridho adalah Rp 575000.0` -> bukti data berhasil diubah setelah diisi dengan nilai yang valid.
+6. Di bagian "Uji data valid", pastikan tidak ada pesan peringatan yang muncul, lalu cek baris terakhir `Status tagihan 1 baru ridho = Lunas` dan `Total tagihan 1 baru ridho = Rp 575000.0` -> bukti data berhasil diubah setelah diisi dengan nilai yang valid.

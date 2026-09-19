@@ -1,5 +1,7 @@
 class Klien:
+
     total_klien = 0
+
     def __init__(self,id, nama, no_hp):
         self.id = id
         self.nama = nama
@@ -23,7 +25,9 @@ class Klien:
         return str(no_hp).isdigit()
 
 class JasaEdit:
+
     total_projek = 0
+
     def __init__(self,kode, projek, durasi, harga):
         self.kode = kode
         self.projek = projek
@@ -67,18 +71,19 @@ class Tagihan:
     @property
     def status(self):
         return self.__status
+    
     @status.setter
     def status(self, status_baru):
         if status_baru in ["Belum Lunas", "Lunas"]:
             self.__status = status_baru
         else:
             print("Status harus 'Belum Lunas' atau 'Lunas'.")
-            
+
     def total_tagihan(self):
         total = self.jasa_edit.harga * self.jasa_edit.durasi
         total_ppn = total * Tagihan.ppn
         return total + total_ppn
-    
+
     @classmethod
     def ubah_ppn(cls, ppn_baru):
         cls.ppn = ppn_baru
@@ -93,8 +98,8 @@ j2 = JasaEdit("J002", "Tugas video", 2, 50000)
 t1 = Tagihan("T001", k1, j1)
 t2 = Tagihan("T002", k2, j2)
 
-print(f"Total tagihan 1 {t1.klien.nama} adalah Rp {t1.total_tagihan()}")
-print(f"Validasi nomor HP {k1.nama}: {k1.validasi_no_hp(k1.no_hp)}")
+print(f"Total tagihan 1 {t1.klien.nama} = Rp {t1.total_tagihan()}")
+print(f"Validasi nomor HP {k1.nama} = {k1.validasi_no_hp(k1.no_hp)}")
 Tagihan.ubah_ppn(0.15)
 
 print("Uji data tidak valid")
@@ -107,5 +112,5 @@ k1.no_hp = "08123456789"
 j1.durasi = 5
 t1.status = "Lunas"
 
-print(f"Status tagihan 1 baru {t1.klien.nama} adalah {t1.status}")
-print(f"Total tagihan 1 baru {t1.klien.nama} adalah Rp {t1.total_tagihan()}")
+print(f"Status tagihan 1 baru {t1.klien.nama} = {t1.status}")
+print(f"Total tagihan 1 baru {t1.klien.nama} = Rp {t1.total_tagihan()}")
