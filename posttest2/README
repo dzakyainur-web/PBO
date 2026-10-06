@@ -1,0 +1,42 @@
+# Posttest 2 — Sistem Manajemen Order & Tarif Jasa Edit Video Creator
+
+## Deskripsi
+Posttest 2 ini melanjutkan program Posttest 1 (Python OOP untuk mengelola order jasa editing). Kali ini aku menambahkan **Relasi UML** (Asosiasi, Agregasi, Komposisi) dan **Inheritance**. Class yang dipakai ada 7: Klien, JasaEdit, JasaVideo, JasaFoto, Studio, CatatanPembayaran, dan Tagihan.
+
+## 1. Relasi UML
+
+**Asosiasi: Klien menggunakan Tagihan.**
+Objek Tagihan tidak disimpan di dalam Klien, hanya diterima lewat parameter method bayar_tagihan() lalu dipakai sementara. Kedua objek tetap berdiri sendiri.
+
+**Agregasi: Studio memiliki Klien dan JasaEdit.**
+Objek Klien dan JasaEdit dibuat di luar, lalu didaftarkan ke Studio lewat tambah_klien() dan tambah_jasa_edit(). Kalau Studio dihapus (del S1), objek k1 dan j1 tetap ada.
+
+**Komposisi: Tagihan terdiri dari CatatanPembayaran.**
+Objek CatatanPembayaran dibuat langsung di dalam Tagihan lewat method buat_catatan() dan disimpan di _riwayat. Catatan ini tidak punya arti tanpa tagihannya, dan ikut hilang kalau Tagihan dihapus.
+
+## 2. Inheritance
+
+- **Superclass:** JasaEdit
+- **Subclass:** JasaVideo (atribut unik: resolusi) dan JasaFoto (atribut unik: format_foto)
+- **super():** kedua subclass memanggil super().__init__(...) untuk mengisi atribut milik superclass.
+- **Method overriding:** hitung_biaya() di-override di kedua subclass.
+  - JasaVideo: biaya naik 20% kalau resolusi 4K, dan ditambah Rp 1.000 kalau durasi lebih dari 10.
+  - JasaFoto: biaya ditambah Rp 20.000 kalau format RAW.
+- **Protected:** _durasi dan _harga di JasaEdit. _durasi diakses langsung oleh JasaVideo pada pengecekan self._durasi > 10`.
+- **Private:** __biaya_admin di JasaEdit, data internal superclass yang tidak bisa diakses subclass.
+
+## Cara Menjalankan & Panduan Pengujian
+1. Jalankan program dengan perintah:
+```bash
+python3 posttest2PBO.py
+```
+2. Cek baris `ridho membayar tagihan T001 sebesar Rp 73260.` dan `ridho tidak dapat membayar tagihan milik jaki.` -> bukti **asosiasi**.
+3. Cek baris `Riwayat pembayaran T001:` beserta isinya -> bukti **komposisi**, catatan dibuat di dalam `Tagihan`.
+4. Cek baris `Daftar Klien di Studio Edit = ['ridho']` dan `nama = ridho, projek = Short Movie` setelah `del S1` -> bukti **agregasi**.
+5. Cek baris `Total tagihan 1 ridho = Rp 73260` -> bukti **method overriding**, biaya dasar `JasaVideo` 55.000 naik 20% karena 4K menjadi 66.000, lalu ditambah PPN 11%.
+6. Cek baris `PPN berhasil diubah menjadi 15.0%` -> bukti classmethod `ubah_ppn()` tetap jalan.
+7. Di bagian "Uji data tidak valid", pastikan muncul 3 pesan peringatan -> bukti validasi setter berjalan.
+8. Di bagian "Uji data valid", pastikan tidak ada pesan peringatan, lalu cek `Status tagihan 1 baru ridho = Lunas` dan `Total tagihan 1 baru ridho = Rp 75900` (PPN sudah 15%).
+
+## Screenshot Output
+![Output program](img/gambar1.png)
